@@ -24,27 +24,33 @@ class _MainPageState extends State<MainPage>{
     super.dispose();
   }
 
+  Expanded myMethodXCustomBtn({required Color color, required int xSoundFile}){
+    return Expanded(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          //backgroundColor: Colors.orange,
+          backgroundColor: color,
+        ),
+        onPressed: () => playSound('assets/audio/mysound${xSoundFile}.wav'),
+        child: const Text('Play Sound'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+          backgroundColor: Colors.black,
           appBar : AppBar(),
           body : SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget> [
-                ElevatedButton(
-                  onPressed: () => playSound('assets/audio/mysound1.wav'),
-                  child: const Text('Play Sound'),
-                ),
-                ElevatedButton(
-                  onPressed: () => playSound('assets/audio/mysound2.wav'),
-                  child: const Text('Play Sound'),
-                ),
-                ElevatedButton(
-                  onPressed: () => playSound('assets/audio/mysound3.wav'),
-                  child: const Text('Play Sound'),
-                ),
+                myMethodXCustomBtn(color: Colors.yellow, xSoundFile: 1),
+                myMethodXCustomBtn(color: Colors.orange, xSoundFile: 2),
+                myMethodXCustomBtn(color: Colors.red, xSoundFile: 3)
               ]
             ),
           )
