@@ -13,12 +13,11 @@ class MainPage extends StatefulWidget{
 class _MainPageState extends State<MainPage>{
 
   final AudioPlayer _player = AudioPlayer();
-
-  Future<void> playSound() async {
-    await _player.setAsset('assets/audio/mysound1.wav');
+  Future<void> playSound(String assetPath) async {  //method
+    await _player.stop(); //ferma eventuale audio precedente
+    await _player.setAsset(assetPath);
     _player.play();
   }
-
   @override
   void dispose() {
     _player.dispose();
@@ -32,11 +31,21 @@ class _MainPageState extends State<MainPage>{
       home: Scaffold(
           appBar : AppBar(),
           body : SafeArea(
-            child: Center(
-              child: ElevatedButton(
-                onPressed: playSound,
-                child: const Text('Play Sound'),
-              ),
+            child: Column(
+              children: <Widget> [
+                ElevatedButton(
+                  onPressed: () => playSound('assets/audio/mysound1.wav'),
+                  child: const Text('Play Sound'),
+                ),
+                ElevatedButton(
+                  onPressed: () => playSound('assets/audio/mysound2.wav'),
+                  child: const Text('Play Sound'),
+                ),
+                ElevatedButton(
+                  onPressed: () => playSound('assets/audio/mysound3.wav'),
+                  child: const Text('Play Sound'),
+                ),
+              ]
             ),
           )
       ),
